@@ -1,0 +1,1437 @@
+Ye lijiye, aapka master prompt text yahan hai. Aap ise yahan se copy kar sakte hain:
+MASTER PROMPT — ARUSHI AI VOICE ASSISTANT
+FULL PRODUCTION-READY VOICE-TO-VOICE + MULTI-LANGUAGE + ANDROID ACTION VERSION
+
+Act as an expert frontend developer, AI engineer, real-time audio engineer, Android integration engineer, Web Audio API engineer, Gemini Live API developer, and UI/UX developer.
+
+Build or update the existing application into a complete, production-ready real-time voice-to-voice AI assistant named "Arushi".
+
+IMPORTANT:
+If an existing Arushi application/codebase is already present, MODIFY THE EXISTING APP instead of creating an unrelated new app.
+
+Preserve all existing working features, existing Arushi personality, existing UI, existing microphone/power button, and all working Gemini Live functionality.
+
+Do not redesign the application unnecessarily.
+
+The final result must be a REAL working assistant, not a UI mockup or demo.
+
+==================================================
+CORE REQUIREMENT
+==================================================
+
+The complete flow must be:
+
+USER SPEAKS
+→ MICROPHONE CAPTURES VOICE
+→ GEMINI LIVE RECEIVES VOICE
+→ GEMINI UNDERSTANDS USER
+→ ARUSHI GENERATES REAL GEMINI AUDIO
+→ AUDIO IS DECODED
+→ AUDIO IS PLAYED THROUGH DEVICE SPEAKER
+→ ARUSHI CAN EXECUTE SAFE SUPPORTED DEVICE ACTIONS
+→ ARUSHI CONTINUES THE CONVERSATION
+
+The most important requirement is:
+
+USER SPEAKS → GEMINI LIVE UNDERSTANDS → ARUSHI RESPONDS WITH ACTUAL AUDIBLE VOICE
+
+There must be NO fake/demo response.
+
+==================================================
+1. TECHNOLOGY
+==================================================
+
+Use the appropriate technologies for the existing project:
+
+- React
+- TypeScript
+- Tailwind CSS
+- Vite
+- "@google/genai"
+- Gemini Live API
+- Gemini Live audio-to-audio interaction
+- Web Audio API
+- Browser Microphone API
+
+For Android-specific device actions, use an appropriate native Android bridge such as Capacitor/native Android integration when the application is packaged as an APK.
+
+If the existing project already uses a working framework, do not unnecessarily migrate the whole project.
+
+Use the current installed "@google/genai" SDK API correctly.
+
+If the installed SDK version has changed from older examples, inspect and use the current API structure.
+
+Do NOT force outdated Gemini Live syntax.
+
+==================================================
+2. ARUSHI PERSONALITY
+==================================================
+
+The assistant's name is Arushi.
+
+Arushi must have this personality:
+
+- Young
+- Confident
+- Witty
+- Sassy
+- Friendly
+- Naturally expressive
+- Playful
+- Slightly teasing
+- Smart
+- Emotionally responsive
+- Casual like a close friend
+- Occasionally uses witty one-liners
+- Can use light sarcasm
+- Can be curious
+- Can be funny
+- Can be surprised
+- Can be excited
+- Can become serious when appropriate
+- Must never sound robotic
+
+Arushi must adapt her tone to the user's emotions and conversation.
+
+Do not make every response sound identical.
+
+Do not repeat generic sentences again and again.
+
+Keep responses natural and concise enough for a real-time voice conversation.
+
+Avoid explicit, sexual, dangerous, or inappropriate content while maintaining personality and charm.
+
+==================================================
+3. GEMINI LIVE — AUDIO TO AUDIO
+==================================================
+
+Use Gemini Live for the complete voice conversation.
+
+Use:
+
+"@google/genai"
+
+Prefer:
+
+"gemini-3.1-flash-live-preview"
+
+If that exact model is unavailable or incompatible with the current SDK/API, use the current Gemini Live model that supports real-time audio input and native audio output, and configure it correctly.
+
+Do NOT replace Gemini Live with normal text generation.
+
+Do NOT use:
+
+- Browser SpeechSynthesis
+- External text-to-speech
+- Pre-recorded audio
+- Fake audio
+- Simulated voice
+- Hard-coded responses
+
+The assistant must receive actual microphone audio and return actual Gemini-generated audio.
+
+Configure the Live session for:
+
+- Audio input
+- Audio output
+- Real-time conversation
+- Function/tool calling where supported
+- Interruption handling
+
+==================================================
+4. ARUSHI SYSTEM INSTRUCTION
+==================================================
+
+Apply a system instruction similar to:
+
+"You are Arushi, a young, confident, witty, playful, and emotionally responsive virtual assistant. Talk naturally and casually like a close friend. Be expressive, slightly teasing, funny, and smart when appropriate. Use light sarcasm and witty responses. Never sound robotic. Adapt your tone to the user's emotions and conversation. Automatically understand and respond in the language the user is speaking. Keep responses natural, engaging, and concise enough for real-time voice conversation. You can execute safe supported device actions through available tools. Never claim that an action was completed unless the application actually executed it. Avoid explicit or inappropriate content while maintaining your charm, confidence, and personality."
+
+Make sure this instruction is actually applied during Live session initialization.
+
+==================================================
+5. MULTI-LANGUAGE SUPPORT
+==================================================
+
+Arushi must understand and speak all languages supported by the selected Gemini Live model.
+
+At minimum, support natural conversation in:
+
+- Hindi
+- English
+- Hinglish
+- Marathi
+- Gujarati
+- Bengali
+- Tamil
+- Telugu
+- Kannada
+- Malayalam
+- Punjabi
+- Urdu
+- Other languages supported by Gemini Live
+
+The user must NOT need to manually select a language.
+
+Automatically detect the language from the user's speech.
+
+Rules:
+
+If user speaks Hindi:
+→ respond in Hindi.
+
+If user speaks English:
+→ respond in English.
+
+If user speaks Hinglish:
+→ respond naturally in Hinglish.
+
+If user switches languages:
+→ Arushi switches naturally.
+
+If user mixes languages:
+→ understand the mixed-language speech and respond naturally.
+
+Do not translate everything unnecessarily.
+
+Do not use browser SpeechSynthesis.
+
+All spoken responses must use Gemini's native audio output.
+
+==================================================
+6. REAL-TIME MICROPHONE
+==================================================
+
+Use the browser microphone API.
+
+The application must:
+
+1. Ask for microphone permission.
+2. Start microphone capture.
+3. Capture audio continuously.
+4. Convert microphone audio into the format required by Gemini Live.
+5. Send PCM audio chunks continuously to the Live session.
+
+Use the correct format required by the actual Live API.
+
+Where required, use:
+
+- PCM
+- 16-bit audio
+- 16kHz input sample rate
+- Mono channel
+- Correct byte encoding
+- Correct Base64 encoding
+
+Do not guess the format.
+
+Inspect the current SDK/API requirements and implement the correct encoding.
+
+Do not send audio as text.
+
+Do not corrupt binary data.
+
+==================================================
+7. CONTINUOUS LIVE SESSION
+==================================================
+
+Maintain ONE continuous Gemini Live session while the user is interacting with Arushi.
+
+Support:
+
+- Continuous microphone input
+- Streaming audio output
+- Real-time conversation
+- Interruption
+- User speaking while Arushi is speaking
+- Tool/function calls
+- Proper cleanup
+- Session disconnect handling
+- Reconnection where appropriate
+
+Do not create duplicate Live sessions unnecessarily.
+
+When the user starts speaking while Arushi is speaking:
+
+→ detect/handle interruption
+→ stop or cancel current playback appropriately
+→ clear queued old response audio
+→ prioritize the new user input
+→ allow Gemini to respond to the new request
+
+Old audio must not continue after interruption.
+
+==================================================
+8. COMPLETE AUDIO PIPELINE
+==================================================
+
+This is a STRICT REQUIREMENT.
+
+The complete pipeline must work:
+
+Microphone
+→ Gemini Live session
+→ Gemini model response
+→ Audio data received
+→ Audio MIME type detected
+→ Base64 decoded
+→ PCM decoded
+→ Int16 PCM converted to Float32 when applicable
+→ AudioBuffer created
+→ AudioBufferSourceNode created
+→ Audio node connected
+→ AudioContext.destination
+→ Device speaker
+
+Do not assume the response is text.
+
+Inspect the actual Live API response structure.
+
+Correctly detect native audio output.
+
+If the response contains multiple audio chunks:
+
+PROCESS ALL AUDIO CHUNKS.
+
+Never silently discard audio.
+
+==================================================
+9. AUDIO RESPONSE DEBUGGING
+==================================================
+
+The previous implementation had a silent-audio problem.
+
+Therefore, actually inspect and verify every part of the audio pipeline.
+
+Add detailed temporary console logs for:
+
+- Gemini session connected
+- Gemini session disconnected
+- Microphone permission requested
+- Microphone permission granted
+- Microphone started
+- Microphone stopped
+- Microphone audio chunk created
+- User audio chunk sent
+- Gemini response received
+- Full response structure received
+- Response contains audio
+- Audio MIME type
+- Audio sample rate
+- Audio channel count
+- Audio chunk length
+- Base64 decoding started
+- Base64 decoding successful
+- PCM decoding started
+- PCM decoding successful
+- Int16 conversion successful
+- Float32 conversion successful
+- AudioBuffer created
+- AudioBuffer duration
+- AudioContext state
+- AudioContext resumed
+- AudioBufferSourceNode created
+- AudioBufferSourceNode started
+- Audio connected to destination
+- Audio playback started
+- Audio playback ended
+- Audio playback interrupted
+- Audio playback error
+
+If any step fails:
+
+LOG THE EXACT ERROR.
+
+Do NOT silently catch and ignore errors.
+
+==================================================
+10. ACTUAL GEMINI RESPONSE PARSING
+==================================================
+
+Inspect the actual response/event structure provided by the current "@google/genai" Live SDK.
+
+Do NOT blindly assume audio exists at a particular property.
+
+Do not use outdated callback examples without verifying them.
+
+Correctly handle the current Live API response structure.
+
+Handle:
+
+- Audio chunks
+- Multiple audio chunks
+- Streaming responses
+- Response completion
+- Interruptions
+- Tool calls
+- Tool responses
+- Errors
+
+Do not check only for text.
+
+The application must not ignore audio because code is looking only for text responses.
+
+==================================================
+11. PCM DECODING
+==================================================
+
+Correctly decode Gemini's actual returned audio format.
+
+Make sure:
+
+- Base64 is decoded correctly
+- Binary data remains binary
+- Signed 16-bit PCM is interpreted correctly when that is the actual format
+- Correct endianness is used
+- Int16 values are converted correctly
+- Float32 values are normalized from -1 to +1
+- Correct sample rate is used
+- Correct channel count is used
+- Mono/stereo is handled correctly
+- No audio bytes are lost
+- No binary audio is converted into text
+- No incorrect WAV header is added unnecessarily
+
+Do not guess.
+
+Use the actual MIME type/format metadata when available.
+
+If the current Gemini Live output format differs from the assumptions above, adapt the decoder to the actual format.
+
+==================================================
+12. MOBILE AUDIOCONTEXT
+==================================================
+
+The app must work properly on Android/mobile browsers, especially Chrome.
+
+Handle browser autoplay restrictions correctly.
+
+The FIRST genuine user interaction must initialize/resume the output audio system.
+
+When the user presses the microphone/power button:
+
+1. Create or initialize the persistent AudioContext.
+2. Resume AudioContext.
+3. Verify AudioContext.state.
+4. Request microphone permission.
+5. Initialize Gemini Live.
+6. Start the Live session.
+7. Prepare the output audio system.
+8. Start microphone streaming.
+
+Before playing any Gemini audio:
+
+Check:
+
+AudioContext.state === "running"
+
+If suspended:
+
+await audioContext.resume()
+
+Then verify that the state is "running".
+
+Do NOT create a new AudioContext for every audio chunk.
+
+Use ONE persistent output AudioContext for the Live session.
+
+==================================================
+13. AUDIO OUTPUT GRAPH
+==================================================
+
+Create a reliable audio graph:
+
+AudioBufferSourceNode
+→ GainNode
+→ AudioContext.destination
+
+Ensure:
+
+- Gain is not muted
+- Gain value > 0
+- AudioContext is running
+- Source node is started
+- Source is connected
+- Destination is connected
+- AudioBuffer contains valid samples
+
+Do not accidentally connect to a disconnected node.
+
+Do not set gain to zero.
+
+Do not mute the output.
+
+==================================================
+14. AUDIO PLAYBACK QUEUE
+==================================================
+
+Gemini may return many small audio chunks.
+
+Implement a proper sequential audio playback queue.
+
+Example:
+
+Chunk 1
+→ Chunk 2
+→ Chunk 3
+→ Chunk 4
+→ Chunk 5
+
+All chunks must play in order.
+
+Do NOT:
+
+- Start all chunks simultaneously
+- Overlap chunks incorrectly
+- Overwrite previous chunks
+- Discard chunks
+- Play only the first chunk
+- Create a new AudioContext per chunk
+
+Use a reliable queue/scheduling system.
+
+The queue must continue until the complete response has finished.
+
+If Arushi is interrupted:
+
+- Stop/cancel currently playing response audio
+- Clear queued old chunks
+- Reset playback scheduling
+- Allow the new response to take priority
+
+==================================================
+15. SPEAKER DIAGNOSTIC TEST
+==================================================
+
+Create a temporary internal speaker test using the SAME AudioContext and SAME output graph.
+
+Add a temporary:
+
+"Test Speaker"
+
+button/function.
+
+When triggered:
+
+1. Resume the same AudioContext.
+2. Generate a short 440Hz tone.
+3. Create an AudioBuffer.
+4. Play it through the same GainNode.
+5. Send it to AudioContext.destination.
+
+Diagnostic logic:
+
+If the 440Hz tone does not play:
+→ fix the Web Audio/mobile output pipeline first.
+
+If the tone plays but Gemini audio does not:
+→ debug Gemini response parsing, MIME type, decoding, or playback queue.
+
+After the implementation is verified, remove the test button from the normal UI unless it remains useful for troubleshooting.
+
+==================================================
+16. ASSISTANT STATES
+==================================================
+
+Maintain these states:
+
+IDLE
+
+Arushi is waiting.
+
+CONNECTING
+
+Gemini Live is connecting.
+
+LISTENING
+
+Microphone is active and Arushi is listening.
+
+SPEAKING
+
+Arushi is generating/playing audio.
+
+ERROR
+
+Something went wrong.
+
+Correctly update UI state.
+
+Do not remain stuck on Listening while Arushi is speaking.
+
+When audio finishes:
+
+SPEAKING
+→ LISTENING or IDLE
+
+depending on whether the Live session remains active.
+
+==================================================
+17. VISUAL AUDIO STATES
+==================================================
+
+Keep the existing UI design if it already exists.
+
+Do not unnecessarily redesign it.
+
+Use the existing visual style and add/fix state feedback where necessary:
+
+- Listening animation
+- Speaking animation
+- Glow
+- Pulse
+- Waveform
+- Breathing effect
+- Connecting state
+- Error state
+
+When Arushi speaks:
+→ visually indicate SPEAKING.
+
+When user speaks:
+→ visually indicate LISTENING.
+
+When disconnected:
+→ show IDLE/DISCONNECTED.
+
+==================================================
+18. NO TRADITIONAL CHAT UI
+==================================================
+
+The primary interaction must remain voice.
+
+Do not replace the existing voice-first experience with a normal text-chat interface.
+
+Text may be used for:
+
+- Status
+- Errors
+- Optional tool/action feedback
+- Debugging
+
+But the main interaction must remain:
+
+USER SPEAKS ↔ ARUSHI SPEAKS.
+
+==================================================
+19. FUNCTION CALLING
+==================================================
+
+Implement Gemini Live function/tool calling for safe device/browser actions.
+
+Create tools such as:
+
+- openWhatsApp
+- openApp
+- openUrl
+- makeCall
+- callContact
+
+The flow must be:
+
+User voice
+→ Gemini understands intent
+→ Gemini generates tool call
+→ Application receives tool call
+→ Application validates arguments
+→ Application executes safe action
+→ Application sends tool response to Gemini
+→ Arushi continues speaking
+
+Do not execute arbitrary JavaScript generated by Gemini.
+
+Only predefined safe functions may be executed.
+
+==================================================
+20. OPEN WHATSAPP
+==================================================
+
+Implement:
+
+openWhatsApp()
+
+Natural commands must work, including:
+
+"Open WhatsApp."
+
+"WhatsApp kholo."
+
+"WhatsApp open karo."
+
+"WhatsApp chalao."
+
+"Can you open WhatsApp?"
+
+"Open my WhatsApp."
+
+Gemini should map these natural requests to the tool.
+
+When possible:
+
+Android native app:
+→ use an appropriate Android intent/deep link to open WhatsApp.
+
+Browser:
+→ use a supported WhatsApp deep link/fallback.
+
+If WhatsApp is not installed or cannot be opened:
+
+→ tell the user honestly.
+
+Do NOT pretend it opened if it did not.
+
+==================================================
+21. GENERIC APP OPENING
+==================================================
+
+Implement a safe:
+
+openApp(appName)
+
+Support common applications where the platform permits it.
+
+Examples:
+
+"Open WhatsApp."
+"Open YouTube."
+"Open Instagram."
+
+Use an allowlist of supported applications.
+
+Do not allow Gemini to execute arbitrary package names or arbitrary commands.
+
+If the app cannot be opened:
+
+→ return a tool error/status to Gemini
+→ Arushi tells the user naturally.
+
+Do not claim success without actual execution.
+
+==================================================
+22. OPEN WEBSITE
+==================================================
+
+Implement:
+
+openWebsite / openUrl
+
+It must accept a valid URL.
+
+Validate URLs before opening.
+
+Prefer HTTPS URLs.
+
+Do not execute arbitrary JavaScript.
+
+Use safe browser APIs such as:
+
+window.open()
+
+or an appropriate native Android intent when available.
+
+Do not allow arbitrary unsafe browser actions.
+
+==================================================
+23. PHONE CALLING
+==================================================
+
+Implement:
+
+makeCall(phoneNumber)
+
+Examples:
+
+"Call 9876543210."
+
+"Phone 9876543210."
+
+"Call this number."
+
+For a normal web environment:
+
+Use:
+
+tel:+PHONE_NUMBER
+
+For Android native environment:
+
+Use the appropriate Android Intent/native bridge.
+
+If direct calling requires permission or is restricted:
+
+Use the appropriate dialer flow instead.
+
+Do not claim the call was completed unless the platform actually completed/started the action.
+
+==================================================
+24. CALL CONTACT BY NAME
+==================================================
+
+Implement:
+
+callContact(contactName)
+
+Natural commands must work:
+
+"Call Mom."
+
+"Call Mummy."
+
+"Call Dad."
+
+"Call Rahul."
+
+"Rahul ko call karo."
+
+"Mummy ko phone lagao."
+
+"Mom ko call karo."
+
+For Android APK/native environment:
+
+Request the appropriate Contacts permission.
+
+Access device contacts through the native Android layer.
+
+Search by contact name.
+
+If EXACTLY ONE suitable contact is found:
+
+→ use that contact's phone number
+→ initiate the supported calling action.
+
+If MULTIPLE matching contacts are found:
+
+→ do NOT guess.
+
+Ask the user:
+
+"I found two contacts named Rahul. Which one should I call?"
+
+If no matching contact is found:
+
+→ tell the user that the contact could not be found.
+
+Never guess a phone number.
+
+==================================================
+25. ANDROID NATIVE BRIDGE
+==================================================
+
+A normal browser cannot freely access installed Android apps, contacts, or direct phone functions.
+
+Therefore, when packaged as an Android APK, implement a proper native bridge.
+
+Use an appropriate solution such as:
+
+- Capacitor
+- Native Android WebView bridge
+- Android Java/Kotlin bridge
+- Another safe native integration supported by the project
+
+Expose only required safe methods, for example:
+
+openApp(appName)
+openWhatsApp()
+openUrl(url)
+makeCall(phoneNumber)
+callContact(contactName)
+
+The web application should detect whether the native bridge is available.
+
+If native bridge exists:
+→ execute native action.
+
+If native bridge does not exist:
+→ use safe browser/deep-link fallback where available.
+
+Never fake success.
+
+==================================================
+26. ANDROID PERMISSIONS
+==================================================
+
+Only request permissions that are actually required.
+
+For microphone:
+
+Request microphone permission.
+
+For contacts:
+
+Request Contacts permission only when the user asks to call a contact by name and the native platform requires it.
+
+For calling:
+
+Use the minimum required calling/dialer permission according to the Android implementation and platform restrictions.
+
+Do not request unnecessary permissions at startup.
+
+Explain permission requirements clearly if needed.
+
+==================================================
+27. ACTION SECURITY
+==================================================
+
+Use an allowlist for device actions.
+
+Allowed examples:
+
+- Open supported applications
+- Open validated websites
+- Start a phone call/dialer action
+- Search contacts for calling
+
+Do NOT allow:
+
+- Arbitrary shell commands
+- Arbitrary JavaScript execution
+- Arbitrary Android intents from model text
+- Arbitrary package installation
+- Dangerous system modifications
+- Hidden background actions
+
+Validate every tool argument before execution.
+
+==================================================
+28. ACTION CONFIRMATION
+==================================================
+
+For potentially consequential actions such as calling a contact, use a safe confirmation approach when required by the platform.
+
+Example:
+
+User:
+"Call Mom."
+
+Arushi:
+"Calling Mom."
+
+Then execute the supported action.
+
+If there is uncertainty about the contact:
+
+Ask for clarification.
+
+If the platform only allows opening the dialer:
+
+Open the dialer with the correct number.
+
+Never call the wrong contact.
+
+==================================================
+29. TOOL RESPONSE
+==================================================
+
+After executing a tool:
+
+Send a structured tool response back to Gemini Live.
+
+Examples:
+
+Success:
+
+{
+  "success": true,
+  "action": "openWhatsApp"
+}
+
+Failure:
+
+{
+  "success": false,
+  "action": "openWhatsApp",
+  "error": "WhatsApp is not installed"
+}
+
+For contact search:
+
+{
+  "success": true,
+  "contacts": [...]
+}
+
+or:
+
+{
+  "success": false,
+  "error": "Multiple matching contacts found"
+}
+
+The exact structure must match the current Gemini Live SDK/function-calling API.
+
+Do not use outdated tool-response syntax.
+
+==================================================
+30. INTERRUPTION HANDLING
+==================================================
+
+Support natural interruptions.
+
+Example:
+
+User:
+"Arushi, tell me about..."
+
+Arushi starts speaking.
+
+User:
+"Wait, stop."
+
+Expected:
+
+- Current Arushi playback stops
+- Current audio queue is cleared
+- New user audio takes priority
+- Gemini receives the new input
+- Arushi responds to the latest request
+
+Old audio must not continue.
+
+==================================================
+31. ERROR HANDLING
+==================================================
+
+Handle:
+
+- Microphone permission denied
+- Microphone unavailable
+- Gemini API connection error
+- Live session error
+- Invalid API key
+- Audio decoding error
+- AudioContext error
+- Browser autoplay restriction
+- Unsupported browser
+- Network failure
+- Tool call failure
+- Native bridge unavailable
+- WhatsApp unavailable
+- Contact permission denied
+- Contact not found
+- Multiple contacts found
+- Call action failure
+- Invalid URL
+- Invalid phone number
+- Session disconnect
+- Invalid audio data
+
+Show a simple user-friendly error.
+
+Also log detailed technical information in the console.
+
+Never fail silently.
+
+==================================================
+32. API KEY / SECURITY
+==================================================
+
+Do NOT hard-code a real Gemini API key into source code.
+
+Use the project's appropriate secure configuration mechanism.
+
+If the current environment requires a frontend API key for development, keep it in the appropriate environment/configuration system rather than hard-coding it.
+
+Do not display the API key in visible UI.
+
+Do not expose unnecessary sensitive data in logs.
+
+==================================================
+33. CLEAN ARCHITECTURE
+==================================================
+
+Keep responsibilities separated.
+
+Use logical modules/classes/functions such as:
+
+- AudioStreamer
+- AudioDecoder
+- AudioPlaybackQueue
+- LiveSession
+- GeminiConfig
+- FunctionCalling
+- DeviceActionBridge
+- ContactService
+- UI state management
+
+The exact architecture may be adapted to the existing project.
+
+Do not put the whole application into one giant function.
+
+Keep:
+
+Microphone handling
+Gemini Live handling
+Audio decoding
+Audio playback
+Tool calling
+Native actions
+UI state
+
+logically separated.
+
+==================================================
+34. STATE MANAGEMENT
+==================================================
+
+Track:
+
+- Connection state
+- Microphone state
+- Live session state
+- AudioContext state
+- Current assistant state
+- Playback queue
+- Current AudioBufferSourceNode
+- Interruption state
+- Native bridge availability
+- Tool execution state
+- Error state
+
+Clean everything when disconnecting.
+
+Stop microphone tracks.
+
+Close/cleanup the Live session appropriately.
+
+Clear audio queue.
+
+Stop active audio sources.
+
+Do not leave duplicate sessions or media streams running.
+
+==================================================
+35. DO NOT BREAK EXISTING FEATURES
+==================================================
+
+If the existing app already has working functionality:
+
+DO NOT unnecessarily rewrite it.
+
+Do NOT:
+
+- Redesign the UI unnecessarily
+- Remove Arushi personality
+- Remove microphone/power button
+- Remove Gemini Live
+- Replace Gemini audio with browser TTS
+- Replace voice interaction with text chat
+- Remove existing working animations
+- Remove existing working features
+- Break existing configuration
+- Remove function calling if already present
+
+Only modify what is necessary.
+
+==================================================
+36. ACTUAL CODE DEBUGGING
+==================================================
+
+Do NOT tell me:
+
+"Your code should work."
+
+Do NOT give generic instructions instead of fixing the implementation.
+
+Actually inspect the existing code.
+
+Find the exact cause of any issue.
+
+Then modify the code.
+
+If SDK/API version mismatch exists:
+→ correct it.
+
+If a Live API callback is wrong:
+→ correct it.
+
+If audio property parsing is wrong:
+→ correct it.
+
+If MIME type handling is wrong:
+→ correct it.
+
+If PCM decoding is wrong:
+→ correct it.
+
+If AudioContext is suspended:
+→ fix initialization/resume logic.
+
+If the playback queue is broken:
+→ fix queue scheduling.
+
+If tool calling is outdated:
+→ update it to the current SDK structure.
+
+If Android bridge is missing:
+→ implement the appropriate bridge/integration.
+
+==================================================
+37. BROWSER VS ANDROID CAPABILITY
+==================================================
+
+The application must understand the difference between:
+
+A. Normal browser mode
+
+and
+
+B. Android APK/native mode.
+
+Normal browser limitations must not be hidden.
+
+Browser mode:
+
+- Microphone: supported with permission
+- Gemini Live: supported if environment/API allows
+- Audio playback: supported
+- WhatsApp: use safe deep link where supported
+- Phone call: tel: dialer flow
+- Contacts: normally NOT directly available
+- Installed app control: limited
+
+Android native mode:
+
+- Use native bridge for supported device actions
+- Access contacts only with permission
+- Use Android intents for supported actions
+- Open installed apps where allowed
+- Handle calling/dialer flows correctly
+
+Do not pretend browser mode has native Android capabilities.
+
+==================================================
+38. FINAL TEST — VOICE
+==================================================
+
+After implementation, verify:
+
+1. Open application on Android Chrome.
+2. Press microphone/power button.
+3. AudioContext initializes.
+4. AudioContext resumes.
+5. AudioContext state becomes "running".
+6. Microphone permission is requested.
+7. Permission is granted.
+8. Gemini Live connects.
+9. UI changes to Listening.
+10. User says:
+
+"Hello Arushi."
+
+11. Microphone audio is captured.
+12. PCM audio is created.
+13. PCM audio is sent to Gemini Live.
+14. Gemini receives audio.
+15. Gemini returns an AUDIO response.
+16. Audio response is detected.
+17. MIME type is detected.
+18. Base64 is decoded.
+19. PCM is decoded.
+20. AudioBuffer is created.
+21. Audio is placed into the queue.
+22. AudioContext is running.
+23. AudioBufferSourceNode starts.
+24. Audio reaches AudioContext.destination.
+25. Phone speaker actually plays Arushi's voice.
+26. UI changes to Speaking.
+27. Playback ends.
+28. UI returns to Listening/Idle.
+
+==================================================
+39. FINAL TEST — LANGUAGES
+==================================================
+
+Test:
+
+"Hello Arushi."
+
+Expected:
+→ English response.
+
+"Arushi, Hindi mein baat karo."
+
+Expected:
+→ Hindi response.
+
+"Arushi, English mein baat karo."
+
+Expected:
+→ English response.
+
+"Arushi, mere se Hinglish mein baat karo."
+
+Expected:
+→ Natural Hinglish response.
+
+Switch language during the same conversation.
+
+Expected:
+→ Arushi adapts automatically.
+
+==================================================
+40. FINAL TEST — APP ACTIONS
+==================================================
+
+Test:
+
+"WhatsApp kholo."
+
+Expected:
+→ WhatsApp actually opens if supported.
+
+"Open WhatsApp."
+
+Expected:
+→ WhatsApp actually opens if supported.
+
+"Open YouTube."
+
+Expected:
+→ YouTube actually opens if supported.
+
+If action is unsupported:
+→ Arushi honestly explains the limitation.
+
+Never fake action completion.
+
+==================================================
+41. FINAL TEST — PHONE CALL
+==================================================
+
+Test:
+
+"Call 9876543210."
+
+Expected:
+
+→ Validate number.
+→ Use appropriate dialer/call flow.
+→ Do not claim success if action fails.
+
+==================================================
+42. FINAL TEST — CONTACT CALL
+==================================================
+
+Test:
+
+"Call Mom."
+
+Expected:
+
+→ Search native contacts if available.
+→ If one matching contact exists, initiate supported call/dialer action.
+→ If multiple matches exist, ask which one.
+→ If no match exists, tell the user.
+
+Test:
+
+"Rahul ko call karo."
+
+Expected:
+
+→ Search contacts.
+→ Do not guess.
+→ Handle multiple matches safely.
+
+==================================================
+43. FINAL TEST — INTERRUPTION
+==================================================
+
+User:
+
+"Arushi, tell me a long story about..."
+
+Arushi starts speaking.
+
+User:
+
+"Stop."
+
+Expected:
+
+→ Current audio stops.
+→ Queue clears.
+→ New user input takes priority.
+→ Arushi responds to the latest request.
+
+==================================================
+44. FINAL TEST — SPEAKER DIAGNOSTIC
+==================================================
+
+Press:
+
+"Test Speaker"
+
+Expected:
+
+→ 440Hz tone is audible through the phone speaker.
+
+If not:
+
+→ Debug and fix AudioContext/output graph.
+
+If tone works but Gemini voice does not:
+
+→ Debug Gemini Live response parsing, MIME type, decoding, queue, and output.
+
+Do not consider the application complete until the actual cause is identified.
+
+==================================================
+45. FINAL ACCEPTANCE CRITERIA
+==================================================
+
+The application is complete ONLY when all of these are true:
+
+✓ User can speak naturally to Arushi.
+✓ Gemini Live receives real microphone audio.
+✓ Gemini Live returns real native audio.
+✓ Arushi's voice is actually audible.
+✓ No browser SpeechSynthesis is used.
+✓ No fake audio is used.
+✓ AudioContext works on Android Chrome.
+✓ Audio playback queue works correctly.
+✓ Multiple Gemini audio chunks are played sequentially.
+✓ Interruptions work.
+✓ Arushi automatically understands supported languages.
+✓ Arushi responds in the user's language.
+✓ Safe function calling works.
+✓ WhatsApp can be opened where platform-supported.
+✓ Supported apps can be opened where platform-supported.
+✓ Phone/dialer actions work where platform-supported.
+✓ Contact calling works through native Android integration where available.
+✓ Multiple contact matches are handled safely.
+✓ Browser limitations are handled honestly.
+✓ No arbitrary JavaScript/device commands are executed.
+✓ Existing UI and working features are preserved.
+✓ Existing Arushi personality is preserved.
+✓ Errors are visible and logged.
+✓ No important failure is silently ignored.
+
+==================================================
+FINAL REQUIRED RESULT
+==================================================
+
+The final application must behave like a real voice-controlled AI assistant.
+
+USER SPEAKS
+→ ARUSHI UNDERSTANDS
+→ ARUSHI RESPONDS WITH REAL AUDIBLE GEMINI VOICE
+→ ARUSHI UNDERSTANDS MULTIPLE LANGUAGES
+→ ARUSHI CAN EXECUTE SAFE SUPPORTED DEVICE ACTIONS
+→ ARUSHI CAN OPEN SUPPORTED APPS SUCH AS WHATSAPP
+→ ARUSHI CAN INITIATE SUPPORTED CALL/DIALER ACTIONS
+→ ARUSHI CAN FIND CONTACTS AND CALL THEM WHEN NATIVE AND PERMISSIONS ALLOW
+→ ARUSHI CONTINUES THE CONVERSATION NATURALLY
+
+DO NOT CONSIDER THE PROJECT COMPLETE JUST BECAUSE THE UI LOOKS CORRECT.
+
+DO NOT CONSIDER IT COMPLETE JUST BECAUSE GEMINI RETURNS TEXT.
+
+DO NOT CONSIDER IT COMPLETE JUST BECAUSE CONSOLE LOGS APPEAR.
+
+THE ACTUAL REQUIREMENT IS:
+
+USER SPEAKS → GEMINI UNDERSTANDS → ARUSHI SPEAKS AUDIBLY → DEVICE ACTIONS WORK WHEN SUPPORTED.
+
+Actually inspect the existing implementation, fix the root causes, implement the required functionality, and leave the existing working UI/features intact.
+
